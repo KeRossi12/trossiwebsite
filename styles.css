@@ -32,8 +32,32 @@
     margin-bottom: 15px;
   }
   
+  .dear-mom {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #ffe4e1;
+  }
+  
   p {
     font-size: 1.1em;
     line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .sign-off {
+    font-size: 1.2em;
+    font-style: italic;
+    color: #ffd700;
+  }
+  
+  /* Styling for responsive image */
+  .mother-image {
+    width: 100%;      /* Make image responsive to container width */
+    max-width: 100%;  /* Prevent the image from growing too large */
+    height: auto;     /* Maintain aspect ratio */
+    margin-top: 20px; /* Space between message and image */
+    border-radius: 10px; /* Rounded corners for the image */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Slight shadow */
   }
   
