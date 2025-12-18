@@ -181,7 +181,7 @@ function setupForm() {
     const subject = encodeURIComponent(`Inquiry for Tessa Rossi — from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`);
 
-    window.location.href = `mailto:hello@tessarossi.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:tessa.rossi@purchase.edu ?subject=${subject}&body=${body}`;
 
     note.textContent = "Opening your email client…";
     form.reset();
