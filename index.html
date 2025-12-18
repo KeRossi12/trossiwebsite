@@ -4,7 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tessa Rossi — Writer</title>
-  <meta name="description" content="Portfolio of Tessa Rossi — writer (MFA, Sarah Lawrence College)." />
+  <meta name="description" content="Tessa Rossi — writer. MFA, Sarah Lawrence College." />
+
+  <!-- Optional: nicer serif. Remove if you want system fonts only. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400,600&family=Inter:wght@400,500,600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -12,141 +17,89 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <header>
+  <header class="site-header">
     <div class="container">
-      <div class="nav" role="navigation" aria-label="Primary">
+      <div class="header-inner">
         <a class="brand" href="#top" aria-label="Go to top">
-          <span class="logo" aria-hidden="true"></span>
-          <div>
-            <strong>Tessa Rossi</strong><br />
-            <span class="subbrand">Writer • MFA, Sarah Lawrence College</span>
-          </div>
+          <div class="brand-name">Tessa Rossi</div>
+          <div class="brand-meta">Writer • MFA, Sarah Lawrence College</div>
         </a>
 
-        <nav class="navlinks" aria-label="Sections">
+        <nav class="nav" aria-label="Sections">
           <a href="#work">Work</a>
           <a href="#about">About</a>
-          <a href="#testimonials">Praise</a>
           <a href="#contact">Contact</a>
+          <a class="nav-cta" href="https://www.instagram.com/tessarossiwriter/" target="_blank" rel="noopener">
+            Instagram
+          </a>
         </nav>
 
-        <div class="actions">
-          <button class="btn hamburger" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            Menu
-          </button>
-
-          <button class="btn" id="themeBtn" title="Toggle theme" aria-pressed="false">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            Theme
-          </button>
-
-          <a class="btn primary" href="#contact">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 8l8 5 8-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M20 6H4v12h16V6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Hire / Contact
-          </a>
-        </div>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
+          Menu
+        </button>
       </div>
 
-      <div class="mobile" id="mobileMenu">
+      <nav class="mobile-nav" id="mobileMenu" aria-label="Mobile">
         <a href="#work">Work</a>
         <a href="#about">About</a>
-        <a href="#testimonials">Praise</a>
         <a href="#contact">Contact</a>
-      </div>
+        <a href="https://www.instagram.com/tessarossiwriter/" target="_blank" rel="noopener">Instagram</a>
+      </nav>
     </div>
   </header>
 
   <main id="main">
     <!-- HERO -->
-    <section id="top">
+    <section id="top" class="hero">
       <div class="container">
-        <div class="grid">
-          <div class="card">
-            <div class="kicker">Writer Portfolio</div>
-            <h1>Fiction and nonfiction that stays with you.</h1>
-            <p class="lead">
-              I’m Tessa Rossi—writer with an MFA from Sarah Lawrence College. I’m interested in voice-driven work,
-              emotional precision, and sentences that do real work.
+        <div class="hero-grid">
+          <div class="hero-main">
+            <p class="kicker">Writer</p>
+            <h1 class="hero-title">Fiction & nonfiction with a clear line and a human pulse.</h1>
+            <p class="hero-lede">
+              I’m Tessa Rossi, a writer with an MFA from Sarah Lawrence College. My work leans voice-forward,
+              attentive to the sentence, and interested in the emotional logic of ordinary days.
             </p>
 
             <div class="hero-actions">
-              <a class="btn primary" href="#work">View work</a>
-              <a class="btn" href="https://www.instagram.com/tessarossiwriter/" target="_blank" rel="noopener">
-                Instagram
-              </a>
-              <a class="btn" href="#" id="downloadBtn">Download CV (PDF)</a>
+              <a class="btn" href="#work">Selected work</a>
+              <a class="btn btn-quiet" href="#contact">Contact</a>
             </div>
 
-            <div class="pills" aria-label="Focus areas">
-              <span class="pill">Short fiction</span>
-              <span class="pill">Personal essay</span>
-              <span class="pill">Book reviews</span>
-              <span class="pill">Editing</span>
-              <span class="pill">Workshops</span>
-            </div>
-
-            <div class="meta" aria-label="Quick info">
-              <span title="Degree">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M22 10 12 5 2 10l10 5 10-5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                  <path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                MFA • Sarah Lawrence
-              </span>
-
-              <span title="Location">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 21s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11Z" stroke="currentColor" stroke-width="2"/>
-                  <path d="M12 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/>
-                </svg>
-                New York (remote available)
-              </span>
-
-              <span title="Response time">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 8v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M21 12a9 9 0 1 1-3-6.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                Replies in 1–3 days
-              </span>
+            <div class="hero-links" aria-label="Quick links">
+              <a href="https://www.instagram.com/tessarossiwriter/" target="_blank" rel="noopener">Instagram</a>
+              <span class="dot" aria-hidden="true">·</span>
+              <a href="mailto:hello@tessarossi.com">hello@tessarossi.com</a>
             </div>
           </div>
 
-          <aside class="card">
-            <div class="kicker">Links</div>
-            <h2 class="side-title">Where to find me</h2>
+          <aside class="hero-aside" aria-label="Summary">
+            <!-- Headshot (optional): put your 683x683 image in /assets and uncomment below -->
+            <img
+              class="headshot"
+              src="assets/trossiheadshot.jpg"
+              alt="Tessa Rossi headshot"
+              loading="lazy"
+            />
 
-            <div class="list">
-              <div class="item">
-                <strong>Instagram</strong>
-                <span>
-                  <a href="https://www.instagram.com/tessarossiwriter/" target="_blank" rel="noopener">
-                    @tessarossiwriter
-                  </a>
-                </span>
-              </div>
-              <div class="item">
-                <strong>Email</strong>
-                <span><a href="mailto:hello@tessarossi.com">hello@tessarossi.com</a></span>
-              </div>
-              <div class="item">
-                <strong>Newsletter</strong>
-                <span><a href="#" aria-label="Newsletter link">Add your link</a></span>
-              </div>
+
+
+            <div class="aside-box">
+              <h2 class="aside-title">At a glance</h2>
+              <ul class="aside-list">
+                <li><strong>Based</strong> New York</li>
+                <li><strong>Works in</strong> short fiction, flash nonfiction</li>
+                <li><strong>Available for</strong> readings, talks, editing</li>
+              </ul>
             </div>
 
-            <div class="item" style="margin-top:16px">
-              <strong>Now booking</strong>
-              <span>Readings • Guest talks • Editing</span>
+            <div class="aside-box">
+              <h2 class="aside-title">Press kit</h2>
+              <p class="aside-text">Optional downloads—wire these to PDFs when you have them.</p>
+              <div class="aside-actions">
+                <a class="text-link" href="#" id="cvLink">CV (PDF)</a>
+                <a class="text-link" href="#" id="pressLink">Press kit</a>
+              </div>
             </div>
           </aside>
         </div>
@@ -154,176 +107,127 @@
     </section>
 
     <!-- WORK -->
-    <section id="work">
+    <section id="work" class="section">
       <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>Selected work</h2>
-            <p>Filter by type and search by keyword.</p>
-          </div>
-
-          <div class="work-tools" aria-label="Work filters">
-            <input class="input" id="search" type="search" placeholder="Search (e.g., fiction, essay, review)" />
-            <select id="filter" aria-label="Filter by category">
-              <option value="all">All</option>
-              <option value="fiction">Fiction</option>
-              <option value="essay">Essay</option>
-              <option value="review">Review</option>
-              <option value="editing">Editing</option>
-            </select>
-          </div>
+        <div class="section-head">
+          <h2>Selected work</h2>
+          <p class="section-sub">A clean list—built for editors, readers, and quick scanning.</p>
         </div>
 
-        <div class="work-grid" id="workGrid" aria-live="polite">
-          <!-- JS injects cards -->
+        <div class="controls" aria-label="Filters">
+          <input id="search" class="input" type="search" placeholder="Search (title, publication, keyword)" />
+
+          <!-- UPDATED: values match script.js categories -->
+          <select id="filter" class="select" aria-label="Filter by category">
+            <option value="all">All</option>
+            <option value="fiction">Fiction</option>
+            <option value="nonfiction">Flash Nonfiction</option>
+            <option value="essay">Essay</option>
+            <option value="review">Review</option>
+            <option value="editing">Editing</option>
+            <option value="reading">Reading</option>
+          </select>
         </div>
+
+        <ol class="work-list" id="workList" aria-live="polite">
+          <!-- JS injects rows -->
+        </ol>
+
+        <p class="fineprint">
+          Tip: keep titles in quotes; publication names in italics.
+        </p>
       </div>
     </section>
 
     <!-- ABOUT -->
-    <section id="about">
+    <section id="about" class="section section-tight">
       <div class="container">
-        <div class="grid">
-          <div class="card about">
-            <div class="kicker">About</div>
-            <h2>Hi, I’m Tessa.</h2>
+        <div class="two-col">
+          <article class="prose">
+            <h2>About</h2>
             <p>
-              I’m a writer with an MFA from Sarah Lawrence College. My work leans character-forward and voice-first,
-              with a soft spot for the strange, the tender, and the quietly funny.
+              I’m a writer with an MFA from Sarah Lawrence College. My work is interested in voice, compression,
+              and the ways intimacy changes what we can say out loud.
             </p>
             <p>
-              Use this site as a template: swap in your publications, add PDFs, and replace placeholders with real links.
+              For editors: I’m happy to share unpublished work on request. For event organizers: I’m available for
+              readings, classroom visits, and guest conversations.
             </p>
+            <p class="prose-links">
+              <a class="text-link" href="https://www.instagram.com/tessarossiwriter/" target="_blank" rel="noopener">Instagram</a>
+              <span class="dot" aria-hidden="true">·</span>
+              <a class="text-link" href="mailto:hello@tessarossi.com">hello@tessarossi.com</a>
+            </p>
+          </article>
 
-            <div class="list">
-              <div class="item">
-                <strong>Genres</strong>
-                <span>Short fiction • Personal essay • Reviews</span>
-              </div>
-              <div class="item">
-                <strong>Services</strong>
-                <span>Editing • Manuscript feedback • Workshop facilitation</span>
-              </div>
-              <div class="item">
-                <strong>Contact</strong>
-                <span><a href="#contact">Use the form below</a> (demo mailto)</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="kicker">Press kit</div>
-            <h2>Quick assets</h2>
-            <div class="list">
-              <div class="item">
-                <strong>Bio (short)</strong>
-                <span>One-paragraph bio for event listings</span>
-              </div>
-              <div class="item">
-                <strong>Headshot</strong>
-                <span>Replace with a real image + link</span>
-              </div>
-              <div class="item">
-                <strong>CV</strong>
-                <span>Add PDF + publication list</span>
-              </div>
+          <aside class="sidebar">
+            <div class="sidebar-box">
+              <h3 class="sidebar-title">Areas</h3>
+              <ul class="sidebar-list">
+                <li>Short fiction</li>
+                <li>Flash nonfiction</li>
+                <li>Book reviews</li>
+                <li>Line & developmental edits</li>
+              </ul>
             </div>
 
-            <div class="note">Tip: connect “Download CV” to a real PDF file in your project folder.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testimonials">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>Praise</h2>
-            <p>Optional—swap these with real blurbs.</p>
-          </div>
-        </div>
-
-        <div class="work-grid testimonials">
-          <div class="card">
-            <div class="kicker">Blurb</div>
-            <div class="quote">“A sharp, luminous voice—emotionally exact without ever over-explaining.”</div>
-            <p class="byline">— Writer / Editor</p>
-          </div>
-          <div class="card">
-            <div class="kicker">Blurb</div>
-            <div class="quote">“Inventive and controlled, with images that land like small revelations.”</div>
-            <p class="byline">— Workshop Instructor</p>
-          </div>
-          <div class="card">
-            <div class="kicker">Blurb</div>
-            <div class="quote">“A rare mix of tenderness and bite. You want to re-read the sentences.”</div>
-            <p class="byline">— Literary Magazine</p>
-          </div>
+            <div class="sidebar-box">
+              <h3 class="sidebar-title">Selected notes</h3>
+              <ul class="sidebar-list">
+                <li>MFA, Sarah Lawrence College</li>
+                <li>New York–based</li>
+                <li>Available for readings/talks</li>
+              </ul>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact">
+    <section id="contact" class="section">
       <div class="container">
-        <div class="grid">
-          <div class="card">
-            <div class="kicker">Contact</div>
-            <h2>Say hello</h2>
-            <p class="lead">This form is demo-only (no backend). It validates and opens an email draft.</p>
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p class="section-sub">This form opens an email draft (no backend required).</p>
+        </div>
 
-            <form id="contactForm" novalidate>
-              <label>
-                <span class="sr">Name</span>
-                <input class="input" type="text" name="name" placeholder="Name" required />
-              </label>
+        <div class="contact-grid">
+          <form id="contactForm" class="contact-form" novalidate>
+            <label class="label">
+              <span class="label-text">Name</span>
+              <input class="input" type="text" name="name" autocomplete="name" required />
+            </label>
 
-              <label>
-                <span class="sr">Email</span>
-                <input class="input" type="email" name="email" placeholder="Email" required />
-              </label>
+            <label class="label">
+              <span class="label-text">Email</span>
+              <input class="input" type="email" name="email" autocomplete="email" required />
+            </label>
 
-              <label>
-                <span class="sr">Message</span>
-                <textarea class="input" name="message" placeholder="What can I help with?" required></textarea>
-              </label>
+            <label class="label">
+              <span class="label-text">Message</span>
+              <textarea class="textarea" name="message" required></textarea>
+            </label>
 
-              <button class="btn primary" type="submit">Send message</button>
-              <div class="note" id="formNote"></div>
-            </form>
-          </div>
+            <button class="btn" type="submit">Send</button>
+            <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+          </form>
 
-          <aside class="card">
-            <div class="kicker">Direct</div>
-            <h2>Other ways</h2>
-            <div class="list">
-              <div class="item">
-                <strong>Email</strong>
-                <span><a href="mailto:hello@tessarossi.com">hello@tessarossi.com</a></span>
-              </div>
-              <div class="item">
-                <strong>Instagram</strong>
-                <span>
-                  <a href="https://www.instagram.com/tessarossiwriter/" target="_blank" rel="noopener">
-                    @tessarossiwriter
-                  </a>
-                </span>
-              </div>
-              <div class="item">
-                <strong>Representation</strong>
-                <span>Add agent/manager (optional)</span>
-              </div>
+          <aside class="contact-aside">
+            <div class="aside-box">
+              <h3 class="aside-title">Direct</h3>
+              <p class="aside-text">
+                Email: <a class="text-link" href="mailto:hello@tessarossi.com">hello@tessarossi.com</a><br/>
+                Instagram: <a class="text-link" href="https://www.instagram.com/tessarossiwriter/" target="_blank" rel="noopener">@tessarossiwriter</a>
+              </p>
             </div>
 
-            <div class="item" style="margin-top:16px">
-              <strong>Downloads</strong>
-              <span>Hook these up to real files later.</span>
-              <div class="dl-row">
-                <a class="link" href="#" id="pressKit">Press kit</a>
-                <a class="link" href="#" id="cvPdf">CV PDF</a>
-              </div>
+            <div class="aside-box">
+              <h3 class="aside-title">Notes</h3>
+              <p class="aside-text">
+                If you’re an editor, please include deadlines and word count.
+                If you’re booking an event, share date, format, and honorarium details.
+              </p>
             </div>
           </aside>
         </div>
@@ -331,20 +235,16 @@
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="foot">
-        <div>© <span id="year"></span> Tessa Rossi</div>
-        <div class="footlinks">
-          <a class="link" href="#top">Top</a>
-          <a class="link" href="#work">Work</a>
-          <a class="link" href="#contact">Contact</a>
-        </div>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Tessa Rossi</div>
+      <div class="footer-links">
+        <a href="#top">Top</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
   </footer>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="script.js" defer></script>
 </body>

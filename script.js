@@ -1,143 +1,140 @@
-// ---------- Data (replace these with real publications/links) ----------
-const projects = [
-  {
-    title: "Short Story — “Placeholder Title”",
-    type: "fiction",
-    date: "2025",
-    blurb: "A voice-forward story about memory, miscommunication, and the quiet stuff we carry.",
-    links: [{ label: "Read", href: "#" }],
-    tags: ["Fiction", "Short story"]
-  },
-  {
-    title: "Personal Essay — “On Keeping Notes”",
-    type: "essay",
-    date: "2025",
-    blurb: "An essay on attention, obsession, and the tiny rituals that become a life.",
-    links: [{ label: "Read", href: "#" }],
-    tags: ["Essay", "Nonfiction"]
-  },
-  {
-    title: "Book Review — “A Novel Worth Arguing With”",
-    type: "review",
-    date: "2024",
-    blurb: "A review that follows the book’s questions instead of summarizing its plot.",
-    links: [{ label: "Read", href: "#" }],
-    tags: ["Review", "Criticism"]
-  },
-  {
-    title: "Editing — Manuscript feedback (sample)",
-    type: "editing",
-    date: "2024",
-    blurb: "Developmental notes + line edits focused on voice, structure, and clarity.",
-    links: [{ label: "Request rates", href: "#contact" }],
-    tags: ["Editing", "Feedback"]
-  }
-];
+// Literary-style portfolio script:
+// - mobile menu
+// - bibliographic "Selected work" list with search + filter
+// - contact form opens a mailto draft
+// - placeholder download links show a message in the form note area
 
-// ---------- Helpers ----------
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-function showToast(msg) {
-  const el = $("#toast");
-  el.textContent = msg;
-  el.classList.add("show");
-  clearTimeout(showToast._t);
-  showToast._t = setTimeout(() => el.classList.remove("show"), 2600);
+/**
+ * Categories used here must match:
+ * - data-cat values on rows
+ * - <select id="filter"> option values in index.html (recommended)
+ */
+const WORK = [
+  {
+    title: "“Our Father”",
+    category: "nonfiction",
+    publication: "BULL",
+    year: "2025",
+    note: "",
+    href: "https://mrbullbull.com/newbull/writer/tessa-rossi/"
+  },
+  {
+    title: "“Maketh the Man”",
+    category: "nonfiction",
+    publication: "Invisible City Literary Journal",
+    year: "2023",
+    note: "",
+    href: "https://www.invisiblecitylit.com/fiction/maketh-the-man/"
+  },
+  {
+    title: "“The Undoing”",
+    category: "nonfiction",
+    publication: "Ogre Red",
+    year: "2022",
+    note: "",
+    href: "https://ogre.red/issues/2022-07/2022-07-rossi-tessa-ellison/"
+  }
+];
+
+const LABELS = {
+  fiction: "Fiction",
+  nonfiction: "Flash Nonfiction",
+  essay: "Essay",
+  review: "Review",
+  editing: "Editing",
+  reading: "Reading"
+};
+
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
-function typeLabel(t) {
-  return ({
-    fiction: "Fiction",
-    essay: "Essay",
-    review: "Review",
-    editing: "Editing"
-  })[t] || "Work";
+function isExternalUrl(url) {
+  try {
+    const u = new URL(url, window.location.href);
+    return u.origin !== window.location.origin;
+  } catch {
+    return false;
+  }
 }
 
-function projectCard(p) {
-  const links = (p.links || [])
-    .map(l => `<a class="link" href="${l.href}">${l.label}</a>`)
-    .join("");
+function label(cat) {
+  return LABELS[cat] || "Work";
+}
 
-  const tags = (p.tags || []).slice(0, 2).join(" • ");
+function itemToRow(item) {
+  const searchBlob = `${item.title} ${item.publication} ${item.note} ${item.year}`.toLowerCase();
 
-  const searchBlob = (p.title + " " + p.blurb + " " + (p.tags || []).join(" ")).toLowerCase();
+  const safeTitle = escapeHtml(item.title);
+  const safePub = escapeHtml(item.publication);
+  const safeNote = escapeHtml(item.note);
+  const safeYear = escapeHtml(item.year);
+  const safeHref = escapeHtml(item.href);
+
+  const external = isExternalUrl(item.href);
+  const targetAttrs = external ? ` target="_blank" rel="noopener"` : "";
 
   return `
-    <article class="work" data-type="${p.type}" data-search="${searchBlob}">
-      <div class="top">
-        <div>
-          <h3>${p.title}</h3>
-          <p>${p.blurb}</p>
-        </div>
-        <span class="tag">${typeLabel(p.type)}</span>
+    <li class="work-row" data-cat="${escapeHtml(item.category)}" data-search="${escapeHtml(searchBlob)}">
+      <div>
+        <p class="work-title">
+          <a href="${safeHref}"${targetAttrs}>${safeTitle}</a>
+        </p>
+        <span class="work-tag">${label(item.category)}</span>
       </div>
-      <div class="bottom">
-        <div class="links">${links}</div>
-        <div class="date">${p.date}${tags ? " • " + tags : ""}</div>
+
+      <div class="work-meta">
+        <em>${safePub}</em><br/>
+        <span>${safeNote}</span>
       </div>
-    </article>
+
+      <div class="work-year">${safeYear}</div>
+    </li>
   `;
 }
 
-function renderProjects() {
-  const grid = $("#workGrid");
-  grid.innerHTML = projects.map(projectCard).join("");
+function renderWork() {
+  const list = $("#workList");
+  if (!list) return;
+  list.innerHTML = WORK.map(itemToRow).join("");
 }
 
 function applyFilters() {
-  const q = ($("#search").value || "").trim().toLowerCase();
-  const type = $("#filter").value;
+  const searchEl = $("#search");
+  const filterEl = $("#filter");
+  const list = $("#workList");
+  if (!searchEl || !filterEl || !list) return;
 
-  const cards = $$("#workGrid .work");
+  const q = (searchEl.value || "").trim().toLowerCase();
+  const cat = filterEl.value;
+
+  const rows = $$("#workList .work-row");
   let visible = 0;
 
-  for (const c of cards) {
-    const matchesType = (type === "all") || (c.dataset.type === type);
-    const matchesQuery = !q || (c.dataset.search || "").includes(q);
-    const show = matchesType && matchesQuery;
-    c.style.display = show ? "flex" : "none";
+  for (const r of rows) {
+    const matchesCat = (cat === "all") || (r.dataset.cat === cat);
+    const matchesQ = !q || (r.dataset.search || "").includes(q);
+    const show = matchesCat && matchesQ;
+
+    // Preserve your grid layout when visible
+    r.style.display = show ? "grid" : "none";
     if (show) visible++;
   }
 
-  const msg = visible ? `${visible} item${visible === 1 ? "" : "s"} shown` : "No items match your filters.";
-  $("#workGrid").setAttribute("aria-label", msg);
+  list.setAttribute(
+    "aria-label",
+    visible ? `${visible} item${visible === 1 ? "" : "s"} shown` : "No items match."
+  );
 }
 
-// ---------- Theme toggle ----------
-const THEME_KEY = "tessa_theme";
-
-function setTheme(mode) {
-  // mode: "dark" | "light"
-  if (mode === "light") {
-    document.documentElement.style.setProperty("--bg", "#f6f7fb");
-    document.documentElement.style.setProperty("--panel", "#ffffff");
-    document.documentElement.style.setProperty("--text", "#0b0f14");
-    document.documentElement.style.setProperty("--muted", "#526074");
-    document.documentElement.style.setProperty("--border", "rgba(11,15,20,.12)");
-    document.body.style.background =
-      "radial-gradient(1200px 700px at 10% 0%, rgba(125,211,252,.18), transparent 55%)," +
-      "radial-gradient(1200px 700px at 90% 10%, rgba(167,139,250,.18), transparent 55%)," +
-      "#f6f7fb";
-  } else {
-    document.documentElement.style.setProperty("--bg", "#0b0f14");
-    document.documentElement.style.setProperty("--panel", "#0f1622");
-    document.documentElement.style.setProperty("--text", "#e9eef6");
-    document.documentElement.style.setProperty("--muted", "#a9b4c2");
-    document.documentElement.style.setProperty("--border", "rgba(233,238,246,.12)");
-    document.body.style.background =
-      "radial-gradient(1200px 700px at 10% 0%, rgba(125,211,252,.16), transparent 55%)," +
-      "radial-gradient(1200px 700px at 90% 10%, rgba(167,139,250,.16), transparent 55%)," +
-      "#0b0f14";
-  }
-
-  localStorage.setItem(THEME_KEY, mode);
-  $("#themeBtn").setAttribute("aria-pressed", String(mode === "light"));
-  showToast(`Theme: ${mode}`);
-}
-
-// ---------- Mobile menu ----------
 function setupMenu() {
   const btn = $("#menuBtn");
   const menu = $("#mobileMenu");
@@ -148,7 +145,7 @@ function setupMenu() {
     btn.setAttribute("aria-expanded", String(open));
   });
 
-  $$("#mobileMenu a").forEach(a =>
+  $$("#mobileMenu a").forEach((a) =>
     a.addEventListener("click", () => {
       menu.classList.remove("open");
       btn.setAttribute("aria-expanded", "false");
@@ -156,10 +153,10 @@ function setupMenu() {
   );
 }
 
-// ---------- Contact form (mailto demo) ----------
 function setupForm() {
   const form = $("#contactForm");
   const note = $("#formNote");
+  if (!form || !note) return;
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -170,63 +167,55 @@ function setupForm() {
     const message = (data.get("message") || "").toString().trim();
 
     note.textContent = "";
+
     if (!name || !email || !message) {
-      note.textContent = "Please fill out all fields.";
-      showToast("Missing fields");
+      note.textContent = "Please fill out name, email, and message.";
       return;
     }
+
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       note.textContent = "Please enter a valid email address.";
-      showToast("Invalid email");
       return;
     }
 
     const subject = encodeURIComponent(`Inquiry for Tessa Rossi — from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`);
 
-    // Replace with your real email address:
     window.location.href = `mailto:hello@tessarossi.com?subject=${subject}&body=${body}`;
-    showToast("Opening email draft…");
+
+    note.textContent = "Opening your email client…";
     form.reset();
   });
 }
 
-// ---------- Demo download links ----------
-function setupDemoLinks() {
-  $("#downloadBtn")?.addEventListener("click", (e) => {
+function setupDownloads() {
+  const note = $("#formNote");
+  if (!note) return;
+
+  const cv = $("#cvLink");
+  const press = $("#pressLink");
+
+  cv?.addEventListener("click", (e) => {
     e.preventDefault();
-    showToast("Demo: link this button to your real CV PDF.");
+    note.textContent = "Add a real CV PDF and link this to it (e.g., /assets/Tessa-Rossi-CV.pdf).";
   });
 
-  $("#pressKit")?.addEventListener("click", (e) => {
+  press?.addEventListener("click", (e) => {
     e.preventDefault();
-    showToast("Demo: link to a press kit PDF.");
-  });
-
-  $("#cvPdf")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    showToast("Demo: link to a CV PDF.");
+    note.textContent = "Add a press kit PDF and link this to it.";
   });
 }
 
-// ---------- Init ----------
 (function init() {
-  $("#year").textContent = new Date().getFullYear();
+  const year = $("#year");
+  if (year) year.textContent = String(new Date().getFullYear());
 
-  renderProjects();
+  renderWork();
   applyFilters();
   setupMenu();
   setupForm();
-  setupDemoLinks();
+  setupDownloads();
 
-  $("#search").addEventListener("input", applyFilters);
-  $("#filter").addEventListener("change", applyFilters);
-
-  const saved = localStorage.getItem(THEME_KEY);
-  if (saved === "light") setTheme("light");
-
-  $("#themeBtn").addEventListener("click", () => {
-    const current = localStorage.getItem(THEME_KEY) || "dark";
-    setTheme(current === "dark" ? "light" : "dark");
-  });
+  $("#search")?.addEventListener("input", applyFilters);
+  $("#filter")?.addEventListener("change", applyFilters);
 })();
